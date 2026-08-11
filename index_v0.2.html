@@ -7,56 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
-<style id="loading-inline-style">
-/* CRITICAL: Loading screen — renders before fonts, pure system fonts */
-#loading-screen {
-  position: fixed; inset: 0; z-index: 9999;
-  background: linear-gradient(160deg, #f5f2ec 0%, #e8e3da 30%, #d5cfc4 70%, #c8c2b6 100%);
-  display: flex; align-items: center; justify-content: center;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
-}
-#loading-screen.hidden { opacity: 0; pointer-events: none; visibility: hidden; }
-.loading-content {
-  display: flex; flex-direction: column; align-items: center;
-  gap: 18px; width: 320px;
-}
-.loading-game-name {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
-  font-size: 2rem; font-weight: 700; letter-spacing: 0.22em;
-  color: #1a1725;
-}
-.loading-game-sub {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
-  font-size: 0.82rem; color: #8a8598; letter-spacing: 0.15em;
-  font-style: italic; margin-top: -8px;
-}
-.loading-progress-track {
-  width: 100%; height: 2px; background: rgba(0,0,0,0.08);
-  border-radius: 1px; overflow: hidden; margin-top: 8px;
-}
-.loading-progress-fill {
-  height: 100%; width: 0%;
-  background: linear-gradient(90deg, #c4a15a, #d4b86a);
-  border-radius: 1px; transition: width 0.35s cubic-bezier(0.4,0,0.2,1);
-}
-.loading-status {
-  font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
-  font-size: 0.72rem; color: #8a8598; letter-spacing: 0.08em;
-}
-.loading-snow-icon {
-  width: 28px; height: 28px; margin-top: 6px;
-  animation: loadingSpin 2.5s linear infinite;
-}
-.loading-snow-icon::before {
-  content: '✦'; display: block; text-align: center;
-  font-size: 1.5rem; color: #c4a15a; line-height: 28px;
-}
-@keyframes loadingSpin {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(1.3); }
-  100% { transform: rotate(360deg) scale(1); }
-}
-</style>
 <style>
 /* ═══════════════════════════════════════════════════
    DESIGN SYSTEM — White Album Winter Morning
@@ -1694,19 +1644,6 @@ body {
 </head>
 <body>
 
-<!-- ═══════════════════ LOADING SCREEN ═══════════════════ -->
-<div id="loading-screen">
-  <div class="loading-content">
-    <div class="loading-game-name">雪之痕</div>
-    <div class="loading-game-sub">Yuki no Kiseki</div>
-    <div class="loading-progress-track">
-      <div class="loading-progress-fill" id="loading-progress-bar"></div>
-    </div>
-    <div class="loading-status" id="loading-status-text">正在准备……</div>
-    <div class="loading-snow-icon"></div>
-  </div>
-</div>
-
 <!-- ═══════════════════ CURSOR TRAIL CANVAS ═══════════════════ -->
 <canvas id="trail-canvas" aria-hidden="true"></canvas>
 
@@ -2391,94 +2328,6 @@ body {
 <!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
 <script>
 'use strict';
-
-// ═══════════════════════════════════
-// LOADING SCREEN & PROGRESS
-// ═══════════════════════════════════
-(function initLoadingScreen() {
-  const loadingScreen = document.getElementById('loading-screen');
-  const progressBar = document.getElementById('loading-progress-bar');
-  const statusText = document.getElementById('loading-status-text');
-  let progress = 0;
-  const stages = [
-    { pct: 15, text: '正在准备……' },
-    { pct: 35, text: '加载字体资源……' },
-    { pct: 60, text: '初始化数据引擎……' },
-    { pct: 85, text: '渲染游戏界面……' },
-    { pct: 100, text: '准备就绪' },
-  ];
-  let currentStage = 0;
-
-  function setProgress(targetPct, text) {
-    // Animate progress smoothly toward target
-    const step = () => {
-      if (progress < targetPct) {
-        progress = Math.min(targetPct, progress + 1.2);
-        progressBar.style.width = progress + '%';
-        requestAnimationFrame(step);
-      } else {
-        progressBar.style.width = targetPct + '%';
-      }
-    };
-    step();
-    if (text) statusText.textContent = text;
-  }
-
-  function advanceStage() {
-    if (currentStage >= stages.length) return;
-    const stage = stages[currentStage];
-    setProgress(stage.pct, stage.text);
-    currentStage++;
-  }
-
-  // Stage 1: Immediate DOM ready
-  advanceStage(); // 15%
-
-  // Stage 2: Font loading (async via FontFace API)
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => {
-      advanceStage(); // 35%
-      // Continue after a brief pause for rendering
-      setTimeout(() => advanceStage(), 180); // 60%
-      setTimeout(() => advanceStage(), 500); // 85%
-      setTimeout(() => finishLoading(), 750);
-    }).catch(() => {
-      // Fallback if font API fails
-      setTimeout(() => advanceStage(), 200);
-      setTimeout(() => advanceStage(), 400);
-      setTimeout(() => advanceStage(), 600);
-      setTimeout(() => finishLoading(), 800);
-    });
-  } else {
-    // No font API — use time-based fallback
-    setTimeout(() => advanceStage(), 200);
-    setTimeout(() => advanceStage(), 500);
-    setTimeout(() => advanceStage(), 800);
-    setTimeout(() => finishLoading(), 1000);
-  }
-
-  function finishLoading() {
-    // Ensure 100%
-    setProgress(100, '准备就绪');
-    // Minimum display time for the 100% state
-    setTimeout(() => {
-      loadingScreen.classList.add('hidden');
-      // Remove loading screen from DOM after transition
-      loadingScreen.addEventListener('transitionend', () => {
-        const style = document.getElementById('loading-inline-style');
-        if (style) style.remove();
-      }, { once: true });
-    }, 350);
-  }
-
-  // Safety timeout: force-hide after 5 seconds no matter what
-  setTimeout(() => {
-    if (!loadingScreen.classList.contains('hidden')) {
-      setProgress(100, '准备就绪');
-      setTimeout(() => loadingScreen.classList.add('hidden'), 200);
-    }
-  }, 5000);
-})();
 
 // ═══════════════════════════════════
 // SILLYTAVERN CORE — IndexedDB
