@@ -11,7 +11,7 @@ Yuki.CONFIG = {
   TYPEWRITER_SPEED: 35,
   DIALOG_HISTORY_LIMIT: 20,
   DB_NAME: 'yuki-no-kiseki-db',
-  DB_VERSION: 1,
+  DB_VERSION: 2,
   VERSION: '2.3'
 };
 
