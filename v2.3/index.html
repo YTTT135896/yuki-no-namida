@@ -303,6 +303,74 @@
   </div>
 </div>
 
+<!-- ═══════════════════ PRESET MANAGER MODAL (NEW v2.3) ═══════════════════ -->
+<div class="modal-overlay" id="modal-presets" role="dialog" aria-modal="true">
+  <div class="modal-panel" style="width:920px"><div class="modal-header"><div><div class="modal-title">预设管理</div><div class="modal-subtitle">Preset Manager</div></div><button class="modal-close" data-close="presets"><span class="material-symbols-rounded">close</span></button></div>
+    <div class="modal-body" style="display:flex;gap:20px;min-height:480px">
+      <!-- Left: preset list -->
+      <aside style="width:220px;flex-shrink:0;border-right:1px solid var(--border-subtle);padding-right:16px">
+        <div style="display:flex;gap:6px;margin-bottom:10px">
+          <button class="inv-action-btn" id="preset-import-btn" style="flex:1"><span class="material-symbols-rounded" style="font-size:1rem">upload</span>导入</button>
+          <button class="inv-action-btn" id="preset-export-btn" style="flex:1"><span class="material-symbols-rounded" style="font-size:1rem">download</span>导出</button>
+        </div>
+        <button class="inv-action-btn" id="preset-new-btn" style="width:100%;margin-bottom:10px"><span class="material-symbols-rounded" style="font-size:1rem">add</span>新建预设</button>
+        <div id="preset-list" style="display:flex;flex-direction:column;gap:2px;max-height:200px;overflow-y:auto"></div>
+        <button class="inv-action-btn" id="preset-reset-btn" style="width:100%;margin-top:10px;font-size:.7rem"><span class="material-symbols-rounded" style="font-size:.9rem">restart_alt</span>重置默认</button>
+      </aside>
+      <!-- Right: preset editor -->
+      <main style="flex:1;overflow-y:auto" id="preset-editor-area">
+        <div id="preset-empty" style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:.9rem">选择一个预设或创建新的</div>
+        <div id="preset-editor" style="display:none">
+          <!-- Preset name & description -->
+          <div style="margin-bottom:10px"><input type="text" class="st-input" id="preset-name-input" placeholder="预设名称" style="font-size:1rem;font-weight:600;width:100%"></div>
+          <div style="margin-bottom:14px"><input type="text" class="st-input" id="preset-desc-input" placeholder="预设描述（可选）" style="width:100%;font-size:.78rem"></div>
+
+          <!-- Generation params -->
+          <div class="preset-section">
+            <div class="preset-section-title"><span class="material-symbols-rounded">tune</span>生成参数</div>
+            <div class="preset-field-row"><span class="preset-field-label">Temperature</span><input type="range" id="preset-temp" min="0" max="2" step="0.01" value="0.8"><span class="preset-field-value" id="preset-temp-val">0.80</span></div>
+            <div class="preset-field-row"><span class="preset-field-label">Max Tokens</span><input type="range" id="preset-max-tokens" min="64" max="4096" step="64" value="1024"><span class="preset-field-value" id="preset-max-tokens-val">1024</span></div>
+            <div class="preset-field-row"><span class="preset-field-label">Top P</span><input type="range" id="preset-top-p" min="0" max="1" step="0.01" value="0.95"><span class="preset-field-value" id="preset-top-p-val">0.95</span></div>
+            <div class="preset-field-row"><span class="preset-field-label">Freq Penalty</span><input type="range" id="preset-freq-pen" min="-2" max="2" step="0.01" value="0"><span class="preset-field-value" id="preset-freq-pen-val">0.00</span></div>
+            <div class="preset-field-row"><span class="preset-field-label">Pres Penalty</span><input type="range" id="preset-pres-pen" min="-2" max="2" step="0.01" value="0"><span class="preset-field-value" id="preset-pres-pen-val">0.00</span></div>
+          </div>
+
+          <!-- System prompt -->
+          <div class="preset-section">
+            <div class="preset-section-title"><span class="material-symbols-rounded">psychology</span>系统提示词（System Prompt）</div>
+            <textarea class="preset-textarea small" id="preset-system-prompt" placeholder="用于设定AI角色的整体语气和行为……"></textarea>
+          </div>
+
+          <!-- Format template -->
+          <div class="preset-section">
+            <div class="preset-section-title"><span class="material-symbols-rounded">description</span>格式模板（Format Template）</div>
+            <textarea class="preset-textarea" id="preset-format-template" placeholder="使用 {{macro}} 宏构建提示词……"></textarea>
+            <div class="preset-macros-help">
+              可用宏：
+              <code>{{char}}</code> <code>{{user}}</code> <code>{{char_card}}</code> <code>{{system_prompt}}</code>
+              <code>{{variables}}</code> <code>{{lorebook_before}}</code> <code>{{lorebook_after}}</code>
+              <code>{{author_note}}</code> <code>{{original}}</code> <code>{{变量名}}</code>
+            </div>
+          </div>
+
+          <!-- Author's note -->
+          <div class="preset-section">
+            <div class="preset-section-title"><span class="material-symbols-rounded">edit_note</span>作者注记（Author's Note）</div>
+            <textarea class="preset-textarea small" id="preset-author-note" placeholder="持续注入的作者偏好……"></textarea>
+          </div>
+
+          <!-- Actions -->
+          <div class="preset-toolbar" style="margin-top:16px">
+            <button class="primary" id="preset-save-btn">保存预设</button>
+            <button id="preset-activate-btn">激活此预设</button>
+            <button class="danger" id="preset-delete-btn">删除预设</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
 <!-- WORLD BOOK MODAL -->
 <div class="modal-overlay" id="modal-lorebook" role="dialog" aria-modal="true">
   <div class="modal-panel" style="width:920px"><div class="modal-header"><div><div class="modal-title">世界书管理</div><div class="modal-subtitle">Lorebook</div></div><button class="modal-close" data-close="lorebook"><span class="material-symbols-rounded">close</span></button></div>
@@ -340,42 +408,6 @@
     <div class="modal-body">
       <div style="display:flex;gap:8px;margin-bottom:16px"><button class="inv-action-btn" id="chat-new-btn"><span class="material-symbols-rounded" style="font-size:1rem">add</span>新对话</button><span style="font-size:.78rem;color:var(--text-muted);margin-left:auto">角色：<strong style="color:var(--accent-gold);margin-left:4px" id="chat-current-char">雪菜</strong></span></div>
       <div id="chat-list" style="display:flex;flex-direction:column;gap:8px;max-height:380px;overflow-y:auto"></div>
-    </div>
-  </div>
-</div>
-
-<!-- PRESET MANAGER MODAL -->
-<div class="modal-overlay" id="modal-presets" role="dialog" aria-modal="true">
-  <div class="modal-panel" style="width:800px">
-    <div class="modal-header"><div><div class="modal-title">预设管理</div><div class="modal-subtitle">Generation Presets</div></div><button class="modal-close" data-close="presets"><span class="material-symbols-rounded">close</span></button></div>
-    <div class="modal-body" style="display:flex;gap:20px;min-height:420px">
-      <aside style="width:260px;flex-shrink:0;border-right:1px solid var(--border-subtle);padding-right:16px">
-        <button class="inv-action-btn" id="preset-new-btn" style="width:100%;margin-bottom:10px"><span class="material-symbols-rounded" style="font-size:1rem">add</span>新建预设</button>
-        <button class="inv-action-btn" id="preset-import-btn" style="width:100%;margin-bottom:10px"><span class="material-symbols-rounded" style="font-size:1rem">upload</span>导入 JSON</button>
-        <div id="preset-list" style="display:flex;flex-direction:column;gap:6px;max-height:320px;overflow-y:auto"></div>
-      </aside>
-      <main style="flex:1;overflow-y:auto" id="preset-editor-area">
-        <div id="preset-empty-state" style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:.9rem">选择或创建一个预设</div>
-        <div id="preset-editor" style="display:none">
-          <div class="preset-form-group"><label class="preset-form-label">预设名称</label><input type="text" class="preset-form-input" id="preset-edit-name"></div>
-          <div class="preset-form-group"><label class="preset-form-label">系统提示词</label><textarea class="preset-form-textarea" id="preset-edit-system-prompt" placeholder="附加在格式模板之前的系统指令……"></textarea></div>
-          <div class="preset-form-group"><label class="preset-form-label">格式模板 <span style="color:var(--accent-gold)">可用宏: {{char}} {{user}} {{char_card}} {{variables}} {{lorebook_before}} {{lorebook_after}} {{author_note}}</span></label><textarea class="preset-form-textarea" id="preset-edit-template" style="min-height:140px"></textarea></div>
-          <div class="preset-form-group"><label class="preset-form-label">作者的备注 (Author's Note)</label><textarea class="preset-form-textarea" id="preset-edit-author-note" style="min-height:50px" placeholder="注入到每轮对话中的自定义备注……"></textarea></div>
-          <div class="preset-form-row">
-            <div class="preset-form-group"><label class="preset-form-label">Temperature <span id="preset-temp-val">0.8</span></label><input type="range" class="settings-slider" id="preset-edit-temp" min="0" max="2" step="0.05" value="0.8" style="width:100%"></div>
-            <div class="preset-form-group"><label class="preset-form-label">Max Tokens</label><input type="number" class="preset-form-input" id="preset-edit-max-tokens" min="64" max="8192" value="1024"></div>
-          </div>
-          <div class="preset-form-row">
-            <div class="preset-form-group"><label class="preset-form-label">Top P</label><input type="number" class="preset-form-input" id="preset-edit-top-p" min="0" max="1" step="0.05" value="1"></div>
-            <div class="preset-form-group"><label class="preset-form-label">Freq Penalty</label><input type="number" class="preset-form-input" id="preset-edit-freq-pen" min="-2" max="2" step="0.1" value="0"></div>
-            <div class="preset-form-group"><label class="preset-form-label">Pres Penalty</label><input type="number" class="preset-form-input" id="preset-edit-pres-pen" min="-2" max="2" step="0.1" value="0"></div>
-          </div>
-          <div style="display:flex;gap:8px;margin-top:12px">
-            <button class="inv-action-btn" id="preset-save-btn" style="background:var(--accent-gold);color:#fff;border:none">保存</button>
-            <button class="inv-action-btn danger-mode" id="preset-delete-btn"><span class="material-symbols-rounded" style="font-size:1rem">delete</span>删除</button>
-          </div>
-        </div>
-      </main>
     </div>
   </div>
 </div>

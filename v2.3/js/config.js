@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════
-   CONFIG & DATA — v2.2
-   All constants, default data, and static assets
+   CONFIG & DATA — v2.3
+   All constants, default data, presets, and static assets
    ═══════════════════════════════════════════════════ */
 window.Yuki = window.Yuki || {};
 
@@ -90,4 +90,118 @@ Yuki.HISTORY_DATA = [
   { speaker:'悠', text:'「现在呢？」' },
   { speaker:'雪菜', text:'「现在啊……」她转过头，看着我，眼睛里带着一种难以形容的情绪。「现在觉得，有些东西比树更高。」' },
   { speaker:'悠', text:'想问的——你指的是什么。但有些问题的答案，也许不知道比较好。' },
+];
+
+/* ═══════════════════════════════════════════════════
+   PRESETS — v2.3 NEW (Tavern-compatible preset system)
+   ═══════════════════════════════════════════════════ */
+
+Yuki.ST = Yuki.ST || {};
+
+/** Default tavern-style format template with macro placeholders */
+Yuki.ST.DEFAULT_FORMAT_TEMPLATE = [
+  '[System Prompt]',
+  '{{system_prompt}}',
+  '',
+  '[角色卡]',
+  '{{char_card}}',
+  '',
+  '[用户信息]',
+  '当前扮演：{{user}}',
+  '',
+  '[游戏状态]',
+  '{{variables}}',
+  '',
+  '[参考信息 · 角色前]',
+  '{{lorebook_before}}',
+  '',
+  '[格式要求]',
+  '请严格按照以下XML标签输出回复：',
+  '<thinking>思考过程（可选）</thinking>',
+  '<maintext>剧情正文</maintext>',
+  '<option>选项A',
+  '选项B</option>',
+  '<sum>简短总结</sum>',
+  '<vars>{"变量名":新值}</vars>',
+  '',
+  '[参考信息 · 角色后]',
+  '{{lorebook_after}}',
+  '',
+  '[Author\'s Note]',
+  '{{author_note}}'
+].join('\n');
+
+/** Default presets — SillyTavern-compatible parameter naming */
+Yuki.ST.DEFAULT_PRESETS = [
+  {
+    id: 'preset-narrative',
+    name: '默认叙事',
+    description: '均衡的叙事参数，适合大多数剧情场景',
+    systemPrompt: '你是一个专业的视觉小说叙述引擎。请以优美的文学笔触推进剧情，注重人物心理描写和环境氛围渲染。',
+    formatTemplate: Yuki.ST.DEFAULT_FORMAT_TEMPLATE,
+    authorNote: '',
+    params: {
+      temperature: 0.8,
+      max_tokens: 1024,
+      top_p: 0.95,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+      stream: true
+    },
+    createdAt: Date.now(),
+    updatedAt: Date.now()
+  },
+  {
+    id: 'preset-literary',
+    name: '文学风格',
+    description: '低温参数，输出更细腻、富有诗意的文学语言',
+    systemPrompt: '你是一个文学向视觉小说的叙述者。请使用细腻、富有诗意的笔触，注重文字的韵律感和意象营造。多用比喻、拟人等修辞手法。',
+    formatTemplate: Yuki.ST.DEFAULT_FORMAT_TEMPLATE,
+    authorNote: '请使用更具文学色彩的叙述方式，适当融入内心独白和环境描写。',
+    params: {
+      temperature: 0.55,
+      max_tokens: 1536,
+      top_p: 0.88,
+      frequency_penalty: 0.1,
+      presence_penalty: 0.1,
+      stream: true
+    },
+    createdAt: Date.now(),
+    updatedAt: Date.now()
+  },
+  {
+    id: 'preset-fast',
+    name: '快速模式',
+    description: '高温度参数，输出简洁、更快节奏的叙述',
+    systemPrompt: '你是一个快节奏视觉小说的叙述引擎。请以简洁明快的语言推进剧情，减少冗长描写，更注重对话和动作。',
+    formatTemplate: Yuki.ST.DEFAULT_FORMAT_TEMPLATE,
+    authorNote: '请保持简洁，每段正文不超过3行。减少环境描写，增加对话比例。',
+    params: {
+      temperature: 1.0,
+      max_tokens: 768,
+      top_p: 0.98,
+      frequency_penalty: 0.05,
+      presence_penalty: 0.05,
+      stream: true
+    },
+    createdAt: Date.now(),
+    updatedAt: Date.now()
+  }
+];
+
+/** Runtime state — initialized in sillytavern-core.js */
+Yuki.ST.presets = JSON.parse(JSON.stringify(Yuki.ST.DEFAULT_PRESETS));
+Yuki.ST.activePresetId = 'preset-narrative';
+
+/* ── Macros reference (for UI help) ── */
+Yuki.ST.SUPPORTED_MACROS = [
+  { name: '{{char}}',         desc: '当前AI角色名' },
+  { name: '{{user}}',         desc: '玩家用户名' },
+  { name: '{{char_card}}',    desc: '角色完整卡片（描述+性格+场景+开场白+例句）' },
+  { name: '{{system_prompt}}',desc: '当前预设的系统提示词' },
+  { name: '{{variables}}',    desc: '所有游戏变量的键值对' },
+  { name: '{{lorebook_before}}', desc: '匹配的世界书条目（角色前位置）' },
+  { name: '{{lorebook_after}}',  desc: '匹配的世界书条目（角色后位置）' },
+  { name: '{{author_note}}',  desc: '当前预设的作者注记' },
+  { name: '{{original}}',     desc: '用户原始输入文本' },
 ];

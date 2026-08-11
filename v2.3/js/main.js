@@ -36,13 +36,13 @@
   Yuki.Features.history.init();
   Yuki.Features.settings.init();
 
-  // Phase 5: SillyTavern (async)
+  // Phase 5: SillyTavern (async) — v2.3 with preset support
   Yuki.ST.init().then(function() {
     Yuki.ST_UI.init();
   });
 
   // Welcome toast (after loading)
-  setTimeout(function() { Yuki.UI.toast('欢迎来到《雪之痕》', 'info', 4000); }, 2000);
+  setTimeout(function() { Yuki.UI.toast('欢迎来到《雪之痕》 v2.3 — 酒馆模式', 'info', 4000); }, 2000);
 
   console.log('%cAll systems initialized %c✓', 'color:#5a8a6a;', '');
 })();
