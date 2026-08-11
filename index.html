@@ -1444,6 +1444,185 @@ body {
 .clothing-detail-close:hover { background: var(--bg-glass-hover); border-color: var(--border-visible); }
 
 /* ═══════════════════════════════════════════════════
+   API SETTINGS & SILLYTAVERN INPUT STYLES
+   ═══════════════════════════════════════════════════ */
+.st-input {
+  width: 260px; padding: 7px 12px;
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm); color: var(--text-primary);
+  font-family: var(--font-body); font-size: 0.82rem; outline: none;
+  transition: border-color var(--transition-fast);
+}
+.st-input:focus { border-color: var(--border-active); }
+.st-input:disabled { opacity: 0.4; cursor: not-allowed; }
+.st-test-btn {
+  padding: 6px 14px; border-radius: 14px;
+  font-size: 0.75rem; cursor: pointer; font-family: var(--font-body);
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+  color: var(--accent-ice); transition: all var(--transition-fast);
+  letter-spacing: 0.03em;
+}
+.st-test-btn:hover { background: rgba(107,143,168,0.1); border-color: var(--accent-ice); }
+
+/* ═══════════════════════════════════════════════════
+   AI OPTION PANEL
+   ═══════════════════════════════════════════════════ */
+.ai-option-panel {
+  position: absolute; bottom: 155px; left: 50%; transform: translateX(-50%);
+  z-index: 12; display: flex; flex-direction: column; gap: 8px;
+  animation: fadeSlideIn 300ms ease-out;
+}
+.ai-option-panel .choice-btn {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-visible);
+  border-radius: var(--radius-md);
+  padding: 12px 28px;
+  color: var(--text-primary); font-family: var(--font-body);
+  font-size: 0.88rem; cursor: pointer; letter-spacing: 0.04em;
+  transition: all var(--transition-fast); text-align: center;
+  min-width: 320px; position: relative; overflow: hidden;
+}
+.ai-option-panel .choice-btn:hover {
+  background: rgba(255,255,255,0.9);
+  border-color: var(--border-active);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-glow-gold);
+}
+.ai-option-panel .choice-index {
+  display: inline-block; width: 20px; height: 20px;
+  border-radius: 50%; background: var(--bg-glass-strong);
+  font-size: 0.65rem; line-height: 20px; text-align: center;
+  margin-right: 10px; color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════════
+   WORLD BOOK EDITOR
+   ═══════════════════════════════════════════════════ */
+.lb-book-item {
+  padding: 8px 12px; border-radius: var(--radius-sm);
+  cursor: pointer; font-size: 0.8rem; color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  display: flex; align-items: center; gap: 8px;
+  letter-spacing: 0.03em;
+}
+.lb-book-item:hover { background: var(--bg-glass-hover); color: var(--text-primary); }
+.lb-book-item.active { background: var(--bg-glass-strong); color: var(--accent-gold); border: 1px solid var(--border-active); }
+.lb-book-item .active-dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  background: var(--success-light);
+}
+.lb-book-item:not(.has-active) .active-dot { background: var(--text-dim); }
+.lb-entry-card {
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md); padding: 12px 14px;
+  transition: all var(--transition-fast);
+}
+.lb-entry-card:hover { border-color: var(--border-visible); }
+.lb-entry-header {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+.lb-entry-toggle {
+  width: 32px; height: 18px; border-radius: 9px;
+  background: var(--border-visible); border: none;
+  cursor: pointer; position: relative; transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+.lb-entry-toggle.on { background: var(--success); }
+.lb-entry-toggle::after {
+  content: ''; position: absolute; top: 2px; left: 2px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: #fff; transition: all var(--transition-fast);
+}
+.lb-entry-toggle.on::after { left: 16px; }
+.lb-entry-keywords {
+  flex: 1; font-size: 0.72rem;
+}
+.lb-entry-keywords input {
+  width: 100%; padding: 3px 8px;
+  background: var(--bg-glass-strong); border: 1px solid var(--border-subtle);
+  border-radius: 4px; color: var(--text-primary); font-size: 0.72rem;
+  font-family: var(--font-body); outline: none;
+}
+.lb-entry-keywords input:focus { border-color: var(--border-active); }
+.lb-entry-content textarea {
+  width: 100%; min-height: 50px; padding: 6px 10px;
+  background: var(--bg-glass-strong); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm); color: var(--text-primary);
+  font-size: 0.78rem; font-family: var(--font-body); resize: vertical;
+  outline: none; line-height: 1.5;
+}
+.lb-entry-content textarea:focus { border-color: var(--border-active); }
+.lb-entry-comment {
+  font-size: 0.65rem; color: var(--text-dim);
+  margin-top: 4px;
+}
+.lb-entry-delete {
+  margin-left: auto; width: 22px; height: 22px; border-radius: 50%;
+  background: transparent; border: none; cursor: pointer;
+  color: var(--text-dim); display: flex; align-items: center;
+  justify-content: center; transition: all var(--transition-fast);
+}
+.lb-entry-delete:hover { color: var(--danger-light); background: rgba(160,64,64,0.1); }
+
+/* ═══════════════════════════════════════════════════
+   VARIABLE PANEL
+   ═══════════════════════════════════════════════════ */
+.var-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; background: var(--bg-glass);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+.var-row:hover { border-color: var(--border-visible); }
+.var-key {
+  font-family: var(--font-mono); font-size: 0.75rem;
+  color: var(--accent-ice); min-width: 140px; letter-spacing: 0.03em;
+}
+.var-value {
+  flex: 1; padding: 3px 8px;
+  background: var(--bg-glass-strong); border: 1px solid var(--border-subtle);
+  border-radius: 4px; color: var(--text-primary); font-size: 0.75rem;
+  font-family: var(--font-mono); outline: none;
+}
+.var-value:focus { border-color: var(--border-active); }
+.var-delete-btn {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: transparent; border: none; cursor: pointer;
+  color: var(--text-dim); display: flex; align-items: center;
+  justify-content: center; transition: all var(--transition-fast);
+}
+.var-delete-btn:hover { color: var(--danger-light); }
+
+/* ═══════════════════════════════════════════════════
+   CHAT MANAGER
+   ═══════════════════════════════════════════════════ */
+.chat-session-card {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; background: var(--bg-glass);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+  transition: all var(--transition-fast); cursor: pointer;
+}
+.chat-session-card:hover { border-color: var(--border-visible); background: var(--bg-glass-hover); }
+.chat-session-card.active { border-color: var(--border-active); background: var(--bg-glass-strong); }
+.chat-session-info { flex: 1; }
+.chat-session-name { font-size: 0.85rem; color: var(--text-primary); letter-spacing: 0.03em; }
+.chat-session-meta {
+  font-size: 0.68rem; color: var(--text-muted); margin-top: 2px;
+  display: flex; gap: 12px;
+}
+.chat-session-actions { display: flex; gap: 4px; }
+.chat-session-action {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+  cursor: pointer; display: flex; align-items: center;
+  justify-content: center; color: var(--text-muted);
+  transition: all var(--transition-fast); font-size: 0.9rem;
+}
+.chat-session-action:hover { border-color: var(--border-visible); color: var(--text-primary); }
+.chat-session-action.danger:hover { color: var(--danger-light); border-color: rgba(160,64,64,0.3); }
+
+/* ═══════════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════════ */
 @media (max-width: 768px) {
@@ -2031,6 +2210,113 @@ body {
   </div>
 </div>
 
+<!-- ═══════════════════ API SETTINGS MODAL ═══════════════════ -->
+<div class="modal-overlay" id="modal-api-settings" role="dialog" aria-modal="true" aria-label="API 设置">
+  <div class="modal-panel">
+    <div class="modal-header">
+      <div><div class="modal-title">API 设置</div><div class="modal-subtitle">AI Connection Settings</div></div>
+      <button class="modal-close" data-close="api-settings" aria-label="关闭"><span class="material-symbols-rounded">close</span></button>
+    </div>
+    <div class="modal-body">
+      <div class="settings-section">
+        <div class="settings-section-title"><span class="material-symbols-rounded">router</span>主 API（剧情生成）</div>
+        <div class="settings-row"><span class="settings-label">API 地址</span><input type="text" class="st-input" id="api-primary-url" placeholder="https://api.openai.com/v1"></div>
+        <div class="settings-row"><span class="settings-label">API Key</span><input type="password" class="st-input" id="api-primary-key" placeholder="sk-..."></div>
+        <div class="settings-row"><span class="settings-label">模型名称</span><input type="text" class="st-input" id="api-primary-model" placeholder="gpt-3.5-turbo"></div>
+        <div class="settings-row"><span class="settings-label">测试连接</span><button class="st-test-btn" id="api-test-btn">发送测试请求</button></div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title"><span class="material-symbols-rounded">dns</span>次 API（变量/总结分流 · 可选）</div>
+        <div class="settings-row"><span class="settings-label">启用次 API</span><button class="settings-toggle" id="api-secondary-toggle" role="switch" aria-checked="false"></button></div>
+        <div class="settings-row"><span class="settings-label">API 地址</span><input type="text" class="st-input" id="api-secondary-url" placeholder="https://api.openai.com/v1" disabled></div>
+        <div class="settings-row"><span class="settings-label">API Key</span><input type="password" class="st-input" id="api-secondary-key" placeholder="sk-..." disabled></div>
+        <div class="settings-row"><span class="settings-label">模型名称</span><input type="text" class="st-input" id="api-secondary-model" placeholder="gpt-3.5-turbo" disabled></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px">
+        <button class="discard-cancel-btn" data-close="api-settings">取消</button>
+        <button class="inv-action-btn" id="api-save-btn" style="background:var(--accent-gold);color:#fff;border:none">保存设置</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ WORLD BOOK MODAL ═══════════════════ -->
+<div class="modal-overlay" id="modal-lorebook" role="dialog" aria-modal="true" aria-label="世界书">
+  <div class="modal-panel" style="width:920px">
+    <div class="modal-header">
+      <div><div class="modal-title">世界书管理</div><div class="modal-subtitle">Lorebook / World Info</div></div>
+      <button class="modal-close" data-close="lorebook" aria-label="关闭"><span class="material-symbols-rounded">close</span></button>
+    </div>
+    <div class="modal-body" style="display:flex;gap:20px;min-height:420px">
+      <aside style="width:240px;flex-shrink:0;border-right:1px solid var(--border-subtle);padding-right:16px">
+        <div style="display:flex;gap:6px;margin-bottom:12px">
+          <button class="inv-action-btn" id="lb-import-btn" style="flex:1"><span class="material-symbols-rounded" style="font-size:1rem">upload</span>导入</button>
+          <button class="inv-action-btn" id="lb-export-btn" style="flex:1"><span class="material-symbols-rounded" style="font-size:1rem">download</span>导出</button>
+        </div>
+        <button class="inv-action-btn" id="lb-new-book-btn" style="width:100%;margin-bottom:12px"><span class="material-symbols-rounded" style="font-size:1rem">add</span>新建世界书</button>
+        <div id="lb-book-list" style="display:flex;flex-direction:column;gap:2px;max-height:260px;overflow-y:auto"></div>
+      </aside>
+      <main style="flex:1;overflow-y:auto" id="lb-editor-area">
+        <div id="lb-empty-state" style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-dim);font-size:0.9rem">
+          选择一个世界书或创建新的来开始编辑
+        </div>
+        <div id="lb-editor" style="display:none">
+          <div style="margin-bottom:12px">
+            <input type="text" class="st-input" id="lb-book-name" placeholder="世界书名称" style="font-size:1rem;font-weight:600">
+          </div>
+          <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center">
+            <button class="inv-action-btn" id="lb-add-entry-btn"><span class="material-symbols-rounded" style="font-size:1rem">add</span>添加条目</button>
+            <label style="font-size:0.72rem;color:var(--text-muted);display:flex;align-items:center;gap:4px;cursor:pointer">
+              <input type="checkbox" id="lb-active-check" checked> 激活此书
+            </label>
+          </div>
+          <div id="lb-entries-list" style="display:flex;flex-direction:column;gap:8px"></div>
+          <button class="inv-action-btn danger-mode" id="lb-delete-book-btn" style="margin-top:16px">
+            <span class="material-symbols-rounded" style="font-size:1rem">delete_forever</span>删除此世界书
+          </button>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ VARIABLE PANEL MODAL ═══════════════════ -->
+<div class="modal-overlay" id="modal-variables" role="dialog" aria-modal="true" aria-label="游戏变量">
+  <div class="modal-panel" style="width:560px">
+    <div class="modal-header">
+      <div><div class="modal-title">游戏变量</div><div class="modal-subtitle">Game Variables & State</div></div>
+      <button class="modal-close" data-close="variables" aria-label="关闭"><span class="material-symbols-rounded">close</span></button>
+    </div>
+    <div class="modal-body">
+      <div id="var-list" style="display:flex;flex-direction:column;gap:6px;max-height:400px;overflow-y:auto"></div>
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <input type="text" class="st-input" id="var-new-key" placeholder="变量名" style="flex:1">
+        <input type="text" class="st-input" id="var-new-value" placeholder="值" style="flex:1">
+        <button class="inv-action-btn" id="var-add-btn"><span class="material-symbols-rounded" style="font-size:1rem">add</span>添加</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CHAT MANAGER MODAL ═══════════════════ -->
+<div class="modal-overlay" id="modal-chat-manager" role="dialog" aria-modal="true" aria-label="对话管理">
+  <div class="modal-panel" style="width:620px">
+    <div class="modal-header">
+      <div><div class="modal-title">对话管理</div><div class="modal-subtitle">Chat Sessions & Branching</div></div>
+      <button class="modal-close" data-close="chat-manager" aria-label="关闭"><span class="material-symbols-rounded">close</span></button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <button class="inv-action-btn" id="chat-new-btn"><span class="material-symbols-rounded" style="font-size:1rem">add</span>新对话</button>
+        <span style="font-size:0.78rem;color:var(--text-muted);display:flex;align-items:center;margin-left:auto">
+          当前角色：<strong style="color:var(--accent-gold);margin-left:4px" id="chat-current-char">雪菜</strong>
+        </span>
+      </div>
+      <div id="chat-list" style="display:flex;flex-direction:column;gap:8px;max-height:380px;overflow-y:auto"></div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════════════════ TOAST CONTAINER ═══════════════════ -->
 <div id="toast-container" aria-live="polite" aria-label="通知"></div>
 
@@ -2042,6 +2328,634 @@ body {
 <!-- ═══════════════════ JAVASCRIPT ═══════════════════ -->
 <script>
 'use strict';
+
+// ═══════════════════════════════════
+// SILLYTAVERN CORE — IndexedDB
+// ═══════════════════════════════════
+const DB_NAME = 'yuki-no-kiseki-db';
+const DB_VERSION = 1;
+let db = null;
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = (e) => {
+      const d = e.target.result;
+      if (!d.objectStoreNames.contains('settings')) d.createObjectStore('settings', { keyPath: 'id' });
+      if (!d.objectStoreNames.contains('lorebooks')) d.createObjectStore('lorebooks', { keyPath: 'id' });
+      if (!d.objectStoreNames.contains('chats')) d.createObjectStore('chats', { keyPath: 'id' });
+      if (!d.objectStoreNames.contains('variables')) d.createObjectStore('variables', { keyPath: 'chatId' });
+      if (!d.objectStoreNames.contains('characterCards')) d.createObjectStore('characterCards', { keyPath: 'id' });
+    };
+    req.onsuccess = (e) => { db = e.target.result; resolve(db); };
+    req.onerror = (e) => reject(e.target.error);
+  });
+}
+
+function dbGet(store, key) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readonly');
+    const req = tx.objectStore(store).get(key);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = (e) => reject(e.target.error);
+  });
+}
+
+function dbGetAll(store) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readonly');
+    const req = tx.objectStore(store).getAll();
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = (e) => reject(e.target.error);
+  });
+}
+
+function dbPut(store, obj) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readwrite');
+    const req = tx.objectStore(store).put(obj);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = (e) => reject(e.target.error);
+  });
+}
+
+function dbDelete(store, key) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readwrite');
+    const req = tx.objectStore(store).delete(key);
+    req.onsuccess = () => resolve();
+    req.onerror = (e) => reject(e.target.error);
+  });
+}
+
+// ═══════════════════════════════════
+// SILLYTAVERN CORE — API Settings
+// ═══════════════════════════════════
+const DEFAULT_API_SETTINGS = {
+  id: 'api-settings',
+  primary: { baseUrl: 'https://api.openai.com/v1', apiKey: '', model: 'gpt-3.5-turbo' },
+  secondary: { enabled: false, baseUrl: '', apiKey: '', model: '' },
+  characterName: '雪菜',
+  userName: '悠',
+  customTags: ['maintext','option','sum','vars','thinking'],
+  uiMode: 'game',
+  formatPromptTemplate: `[角色设定]
+{{character}}
+
+[当前状态]
+{{variables}}
+
+[世界信息]
+{{lorebooks}}
+
+[格式要求]
+请严格按照以下XML标签输出回复：
+<thinking>你的思考过程（可选）</thinking>
+<maintext>剧情正文内容</maintext>
+<option>选项A
+选项B
+选项C</option>
+<sum>本回合简短总结</sum>
+<vars>{"变量名": 新值}</vars>`
+};
+
+let apiSettings = { ...DEFAULT_API_SETTINGS, id: 'api-settings' };
+
+async function loadApiSettings() {
+  try {
+    const saved = await dbGet('settings', 'api-settings');
+    if (saved) { apiSettings = { ...DEFAULT_API_SETTINGS, ...saved }; }
+  } catch(e) { /* use defaults */ }
+}
+
+async function saveApiSettings() {
+  try { await dbPut('settings', apiSettings); } catch(e) {}
+}
+
+// ═══════════════════════════════════
+// SILLYTAVERN CORE — Lorebook Engine
+// ═══════════════════════════════════
+const DEFAULT_LOREBOOK = {
+  id: 'default-lore',
+  name: '雪之痕·世界设定',
+  entries: [
+    { id:'e1', keys:['雪菜','白羽'], content:'白羽雪菜，17岁，文学部成员。性格温柔内向，喜欢读书和热可可。住在车站附近的公寓里。', comment:'女主角基本设定', enabled:true, position:'before_char' },
+    { id:'e2', keys:['奏','星野'], content:'星野奏，17岁，轻音部主唱兼吉他手。表面上开朗活泼，但内心深处藏着不为人知的伤痛。', comment:'第二女主角', enabled:true, position:'before_char' },
+    { id:'e3', keys:['零','月島'], content:'月岛零，18岁，三年级前辈。天文部唯一成员。话不多但观察力敏锐，喜欢在深夜的天文台独自观星。', comment:'第三女主角', enabled:true, position:'before_char' },
+    { id:'e4', keys:['车站','駅'], content:'故事的主要场景之一。位于小镇中心，是学生们上下学的必经之路。傍晚时分灯光特别温暖。', comment:'场景设定', enabled:true, position:'before_char' },
+    { id:'e5', keys:['圣诞','圣诞节','12月'], content:'故事发生在12月圣诞季。小镇被白雪覆盖，到处装饰着圣诞灯饰。这是一个关于冬季恋爱的故事。', comment:'时间设定', enabled:true, position:'before_char' },
+  ]
+};
+
+let lorebooks = [DEFAULT_LOREBOOK];
+let activeLorebookIds = ['default-lore'];
+
+async function loadLorebooks() {
+  try {
+    const saved = await dbGetAll('lorebooks');
+    if (saved.length > 0) lorebooks = saved;
+    else lorebooks = [DEFAULT_LOREBOOK];
+  } catch(e) { lorebooks = [DEFAULT_LOREBOOK]; }
+}
+
+async function saveLorebooks() {
+  try {
+    for (const lb of lorebooks) { await dbPut('lorebooks', lb); }
+  } catch(e) {}
+}
+
+function matchLorebooks(userInput) {
+  const activated = [];
+  const lowerInput = userInput.toLowerCase();
+  for (const lbId of activeLorebookIds) {
+    const lb = lorebooks.find(l => l.id === lbId);
+    if (!lb) continue;
+    for (const entry of lb.entries) {
+      if (!entry.enabled) continue;
+      const matched = entry.keys.some(key => lowerInput.includes(key.toLowerCase()));
+      if (matched) activated.push(entry);
+    }
+  }
+  return activated;
+}
+
+// ═══════════════════════════════════
+// SILLYTAVERN CORE — Character Cards
+// ═══════════════════════════════════
+const DEFAULT_CHARACTER_CARDS = [
+  {
+    id: 'char-yukina',
+    name: '白羽雪菜',
+    description: '17岁，文学部成员。温柔内向，喜欢读书和热可可。',
+    personality: '内向温柔、细腻敏感、容易害羞、偶尔固执。说话轻声细语，不善表达但内心情感丰富。',
+    scenario: '圣诞夜的车站前，你与雪菜相遇。雪花静静飘落，她围着新织的围巾，在等你。',
+    firstMessage: '「那个……谢谢你今天愿意来。」她微微低头，围巾的流苏在指尖缠绕。',
+    exampleDialogs: '雪菜: 「下雪了呢……」\n悠: 「是啊，今年的雪好像比往常更大。」\n雪菜: 「嗯。不过……我不讨厌。因为雪让一切都变得安静了。」',
+    systemPrompt: '你正在扮演白羽雪菜——一个温柔内向的17岁女孩。请用轻柔、略带犹豫的语气说话，偶尔会陷入沉默。你的情感细腻而复杂，对悠有着淡淡的、尚未说出口的情愫。'
+  },
+  {
+    id: 'char-kanade',
+    name: '星野奏',
+    description: '17岁，轻音部主唱兼吉他手。开朗活泼，热爱摇滚。',
+    personality: '表面开朗活泼，内心有隐痛。热爱音乐，在舞台上光芒四射。私下里偶尔会露出脆弱的一面。',
+    scenario: '轻音部的排练室里，奏正在调试吉他。看到你进来，她抬起头，露出一个明亮的笑容。',
+    firstMessage: '「哟！来得正好——听听这段solo怎么样？」她拨动琴弦，一段轻快的旋律流淌出来。',
+    exampleDialogs: '奏: 「音乐这种东西啊，可以不说话就把心里的话说出去。很狡猾吧？」\n悠: 「那你刚才的solo说了什么？」\n奏: 「……秘密。」',
+    systemPrompt: '你正在扮演星野奏——一个17岁的摇滚少女。请用活泼开朗的语气说话，偶尔流露出内心的脆弱。你对音乐有极高的热情，会用音乐来表达自己不愿直接说出口的情感。'
+  },
+  {
+    id: 'char-rei',
+    name: '月岛零',
+    description: '18岁，三年级前辈。天文部唯一成员。安静寡言，观察力敏锐。',
+    personality: '话少但精准，不喜无意义社交。对天文有极深的造诣。看似冷漠，实则会在意身边的人。',
+    scenario: '深夜的天文台，零正在调整望远镜。门轻轻推开——是你。',
+    firstMessage: '「……这么晚了还上来，不冷吗？」她没有回头，但语气中并没有拒绝的意思。',
+    exampleDialogs: '零: 「你知道吗，我们现在看到的星光，可能是几万年前发出的。」\n悠: 「所以我们看到的是过去？」\n零: 「嗯。就像记忆一样。」',
+    systemPrompt: '你正在扮演月岛零——一个18岁的安静前辈。请用简短但意味深长的方式说话，偶尔会用天文相关的比喻。你的话语不多但每一句都很精准。你对悠抱有一种若即若离的关心，但从不明确表达。'
+  }
+];
+
+let characterCards = [...DEFAULT_CHARACTER_CARDS];
+let activeCharacterId = 'char-yukina';
+
+async function loadCharacterCards() {
+  try {
+    const saved = await dbGetAll('characterCards');
+    if (saved.length > 0) characterCards = saved;
+  } catch(e) {}
+}
+
+async function saveCharacterCards() {
+  try { for (const card of characterCards) { await dbPut('characterCards', card); } } catch(e) {}
+}
+
+function getActiveCharacter() {
+  return characterCards.find(c => c.id === activeCharacterId) || characterCards[0];
+}
+
+// ═══════════════════════════════════
+// SILLYTAVERN CORE — Variables
+// ═══════════════════════════════════
+let gameVariables = {
+  chapter: '第一章',
+  location: '车站前',
+  time: '傍晚',
+  weather: '雪',
+  yukina_affection: 62,
+  kanade_affection: 45,
+  rei_affection: 20,
+  player_gold: 12580,
+  player_gems: 34,
+  flags: {}
+};
+
+function getVariablesText() {
+  return Object.entries(gameVariables)
+    .filter(([k]) => !k.startsWith('_'))
+    .map(([k, v]) => `${k}: ${typeof v === 'object' ? JSON.stringify(v) : v}`)
+    .join('\n');
+}
+
+function mergeVariables(jsonStr) {
+  try {
+    const parsed = JSON.parse(jsonStr);
+    gameVariables = { ...gameVariables, ...parsed };
+  } catch(e) { /* ignore parse errors */ }
+}
+
+let variableSnapshots = {}; // messageId → snapshot
+
+function snapshotVariables(messageId) {
+  variableSnapshots[messageId] = JSON.parse(JSON.stringify(gameVariables));
+}
+
+function rollbackVariables(messageId) {
+  if (variableSnapshots[messageId]) {
+    gameVariables = JSON.parse(JSON.stringify(variableSnapshots[messageId]));
+  }
+}
+
+// ═══════════════════════════════════
+// SILLYTAVERN CORE — Prompt Assembler
+// ═══════════════════════════════════
+function assemblePrompt(userInput, chatHistory) {
+  const character = getActiveCharacter();
+  const activatedLore = matchLorebooks(userInput);
+  const loreText = activatedLore.map(e => e.content).join('\n');
+  const varsText = getVariablesText();
+
+  let prompt = apiSettings.formatPromptTemplate
+    .replace('{{character}}', `【${character.name}】\n${character.description}\n性格：${character.personality}\n\n${character.systemPrompt}`)
+    .replace('{{variables}}', varsText)
+    .replace('{{lorebooks}}', loreText || '（无激活的世界书条目）');
+
+  // Build messages array
+  const messages = [
+    { role: 'system', content: prompt }
+  ];
+
+  // Add chat history (last 20 messages)
+  if (chatHistory && chatHistory.length > 0) {
+    const recent = chatHistory.slice(-20);
+    for (const msg of recent) {
+      messages.push({ role: msg.role, content: msg.content });
+    }
+  }
+
+  // Add current user input
+  messages.push({ role: 'user', content: userInput });
+
+  return messages;
+}
+
+// ═══════════════════════════════════
+// SILLYTAVERN CORE — Stream Parser
+// ═══════════════════════════════════
+class StreamParser {
+  constructor() {
+    this.buffer = '';
+    this.tags = {};
+    this.currentTag = null;
+  }
+
+  feed(chunk) {
+    this.buffer += chunk;
+    this._parse();
+  }
+
+  _parse() {
+    const tagPattern = /<(\/)?(thinking|maintext|option|sum|vars|think)>/gi;
+    // Simple state machine for tag parsing
+    let result = { maintext: '', option: '', sum: '', vars: '', thinking: '', complete: false };
+    const text = this.buffer;
+
+    // Extract content between tags
+    const extract = (tag, text) => {
+      const openRegex = new RegExp(`<${tag}>`, 'i');
+      const closeRegex = new RegExp(`</${tag}>`, 'i');
+      const openMatch = text.match(openRegex);
+      const closeMatch = text.match(closeRegex);
+      if (openMatch && closeMatch) {
+        const start = openMatch.index + openMatch[0].length;
+        const end = closeMatch.index;
+        return { content: text.slice(start, end).trim(), complete: true };
+      } else if (openMatch) {
+        const start = openMatch.index + openMatch[0].length;
+        return { content: text.slice(start).trim(), complete: false };
+      }
+      return { content: '', complete: false };
+    };
+
+    const tags = ['thinking', 'think', 'maintext', 'option', 'sum', 'vars'];
+    for (const tag of tags) {
+      const r = extract(tag, text);
+      if (r.content) {
+        result[tag === 'think' ? 'thinking' : tag] = r.content;
+        if (r.complete) result.complete = true;
+      }
+    }
+
+    return result;
+  }
+
+  flush() {
+    const result = this._parse();
+    this.buffer = '';
+    return result;
+  }
+}
+
+// ═══════════════════════════════════
+// SILLYTAVERN CORE — AI Chat
+// ═══════════════════════════════════
+let currentChatId = null;
+let chatHistory = [];
+let isAiStreaming = false;
+
+async function initChat() {
+  const chatId = 'chat-' + Date.now();
+  currentChatId = chatId;
+  chatHistory = [];
+  return chatId;
+}
+
+async function sendToAI(userInput) {
+  if (isAiStreaming) return;
+  if (!apiSettings.primary.apiKey) {
+    showToast('请先在 API 设置中配置 API Key', 'warning', 4000);
+    return;
+  }
+
+  isAiStreaming = true;
+  const messages = assemblePrompt(userInput, chatHistory);
+  // Add to history
+  chatHistory.push({ role: 'user', content: userInput, id: 'msg-' + Date.now(), timestamp: Date.now() });
+
+  // Update dialog to show "thinking..."
+  dialogSpeakerEl.textContent = getActiveCharacter().name;
+  dialogTextEl.textContent = '……';
+  dialogTextEl.style.opacity = '0.5';
+  hideRespondHint();
+  hideLlmInput();
+
+  try {
+    const response = await fetch(apiSettings.primary.baseUrl + '/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + apiSettings.primary.apiKey,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: apiSettings.primary.model,
+        messages: messages,
+        temperature: 0.8,
+        max_tokens: 1024,
+        stream: true
+      })
+    });
+
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`API Error ${response.status}: ${errText}`);
+    }
+
+    const parser = new StreamParser();
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let fullContent = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value, { stream: true });
+      // Parse SSE chunks
+      const lines = chunk.split('\n');
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const data = line.slice(6).trim();
+        if (data === '[DONE]') continue;
+        try {
+          const json = JSON.parse(data);
+          const delta = json.choices?.[0]?.delta?.content;
+          if (delta) {
+            fullContent += delta;
+            // Stream to dialog
+            dialogTextEl.textContent = fullContent;
+            dialogTextEl.style.opacity = '0.85';
+          }
+        } catch(e) { /* skip malformed chunks */ }
+      }
+    }
+
+    // Parse final content for XML tags
+    const parsed = new StreamParser();
+    parsed.feed(fullContent);
+    const result = parsed.flush();
+
+    // Use maintext if available, otherwise use raw content
+    const displayText = result.maintext || fullContent;
+    dialogTextEl.textContent = displayText;
+    dialogTextEl.style.opacity = '1';
+
+    // Handle variables
+    if (result.vars) {
+      mergeVariables(result.vars);
+    }
+
+    // Handle options
+    if (result.option) {
+      const options = result.option.split('\n').filter(o => o.trim());
+      if (options.length > 0) {
+        renderAiOptions(options);
+      }
+    }
+
+    // Add to chat history
+    const assistantMsg = {
+      id: 'msg-' + Date.now(),
+      role: 'assistant',
+      content: displayText,
+      rawContent: fullContent,
+      timestamp: Date.now(),
+      vars: result.vars || null,
+      options: result.option ? result.option.split('\n').filter(o => o.trim()) : []
+    };
+    chatHistory.push(assistantMsg);
+    snapshotVariables(assistantMsg.id);
+
+    // Save chat to DB
+    saveCurrentChat();
+
+    // Show respond hint for next interaction
+    showRespondHint();
+
+    // Check if there are options
+    if (result.option) {
+      const opts = result.option.split('\n').filter(o => o.trim());
+      if (opts.length > 0) {
+        renderAiOptions(opts);
+      }
+    }
+
+  } catch (err) {
+    console.error('AI Chat error:', err);
+    dialogTextEl.textContent = '……（连接中断）';
+    dialogTextEl.style.opacity = '0.5';
+    showToast('AI 连接失败：' + err.message, 'error', 5000);
+    showRespondHint();
+  } finally {
+    isAiStreaming = false;
+  }
+}
+
+function renderAiOptions(options) {
+  const container = document.createElement('div');
+  container.className = 'ai-option-panel';
+  container.id = 'ai-option-panel';
+  // Remove existing
+  const existing = document.getElementById('ai-option-panel');
+  if (existing) existing.remove();
+
+  options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.innerHTML = `<span class="choice-index">${i + 1}</span>${opt.trim()}`;
+    btn.addEventListener('click', () => {
+      container.remove();
+      sendToAI(opt.trim());
+    });
+    container.appendChild(btn);
+  });
+
+  document.getElementById('dialog-area').appendChild(container);
+}
+
+async function saveCurrentChat() {
+  if (!currentChatId || chatHistory.length === 0) return;
+  try {
+    await dbPut('chats', {
+      id: currentChatId,
+      name: '会话 ' + new Date().toLocaleString('zh-CN'),
+      messages: chatHistory,
+      createdAt: Date.now(),
+      characterId: activeCharacterId
+    });
+    await dbPut('variables', {
+      chatId: currentChatId,
+      variables: gameVariables
+    });
+  } catch(e) {}
+}
+
+async function loadChat(chatId) {
+  try {
+    const chat = await dbGet('chats', chatId);
+    if (chat) {
+      currentChatId = chat.id;
+      chatHistory = chat.messages || [];
+      activeCharacterId = chat.characterId || 'char-yukina';
+      const vars = await dbGet('variables', chatId);
+      if (vars) gameVariables = vars.variables;
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+async function getAllChats() {
+  try { return await dbGetAll('chats'); } catch(e) { return []; }
+}
+
+async function deleteChat(chatId) {
+  try {
+    await dbDelete('chats', chatId);
+    await dbDelete('variables', chatId);
+  } catch(e) {}
+}
+
+function truncateChatAt(messageId) {
+  const idx = chatHistory.findIndex(m => m.id === messageId);
+  if (idx >= 0) {
+    chatHistory = chatHistory.slice(0, idx + 1);
+    rollbackVariables(messageId);
+    saveCurrentChat();
+  }
+}
+
+function branchChat(messageId) {
+  const idx = chatHistory.findIndex(m => m.id === messageId);
+  if (idx >= 0) {
+    rollbackVariables(messageId);
+    // Create new chat with history up to this point
+    const branchHistory = chatHistory.slice(0, idx + 1);
+    currentChatId = 'chat-' + Date.now();
+    chatHistory = branchHistory;
+    saveCurrentChat();
+    showToast('已创建新的对话分支', 'info', 2000);
+  }
+}
+
+// ═══════════════════════════════════
+// NAV: Add API & Lorebook items
+// ═══════════════════════════════════
+function initSillyTavernNav() {
+  const navItems = document.querySelector('.nav-items');
+  // Add before the back-to-title divider
+  const backDivider = document.querySelector('#nav-back-to-title').previousElementSibling;
+  const apiItem = document.createElement('div');
+  apiItem.className = 'nav-item';
+  apiItem.id = 'nav-api-settings';
+  apiItem.innerHTML = '<span class="material-symbols-rounded">api</span>API 设置';
+  apiItem.addEventListener('click', () => { closeNavDrawer(); openApiSettings(); });
+  backDivider.before(apiItem);
+
+  const loreItem = document.createElement('div');
+  loreItem.className = 'nav-item';
+  loreItem.id = 'nav-lorebook';
+  loreItem.innerHTML = '<span class="material-symbols-rounded">menu_book</span>世界书';
+  loreItem.addEventListener('click', () => { closeNavDrawer(); openLorebookModal(); });
+  backDivider.before(loreItem);
+
+  const varItem = document.createElement('div');
+  varItem.className = 'nav-item';
+  varItem.id = 'nav-variables';
+  varItem.innerHTML = '<span class="material-symbols-rounded">database</span>游戏变量';
+  varItem.addEventListener('click', () => { closeNavDrawer(); openVariablePanel(); });
+  backDivider.before(varItem);
+
+  const chatItem = document.createElement('div');
+  chatItem.className = 'nav-item';
+  chatItem.id = 'nav-chat-history';
+  chatItem.innerHTML = '<span class="material-symbols-rounded">chat_bubble</span>对话管理';
+  chatItem.addEventListener('click', () => { closeNavDrawer(); openChatManager(); });
+  backDivider.before(chatItem);
+
+  const div = document.createElement('div');
+  div.className = 'nav-divider';
+  backDivider.before(div);
+}
+
+// ═══════════════════════════════════
+// OVERRIDE: Wire LLM input to AI
+// ═══════════════════════════════════
+const origSendLlmMessage = sendLlmMessage;
+sendLlmMessage = function() {
+  const msg = llmInput.value.trim();
+  if (!msg) return;
+  llmInput.value = '';
+  hideLlmInput();
+  showToast('正在生成回复……', 'info', 1500);
+  sendToAI(msg);
+};
+
+// Override respond hint to also use AI
+const origShowRespondHint = showRespondHint;
+showRespondHint = function() {
+  respondHint.classList.add('visible');
+  dialogAdvanceHint.style.opacity = '0';
+};
+
 
 // ═══════════════════════════════════
 // CURSOR TRAIL SYSTEM
@@ -2692,15 +3606,22 @@ function sendLlmMessage() {
   if (!msg) return;
   llmInput.value = '';
   hideLlmInput();
-  showToast('消息已发送（模拟）', 'info', 2000);
-  dialogScript.push({ speaker: '悠', text: msg });
-  const responses = [
-    { speaker: '雪菜', text: '「嗯……你说得对呢。」她微微侧头，似乎在思考着什么。「我会……好好考虑的。」' },
-    { speaker: '雪菜', text: '她沉默了片刻，然后轻轻点头。「原来你是这样想的啊。谢谢你告诉我。」' },
-  ];
-  dialogScript.push(responses[Math.floor(Math.random() * responses.length)]);
-  dialogIndex = dialogScript.length - 2;
-  showDialog(dialogIndex);
+  if (apiSettings.primary.apiKey) {
+    // Use real AI
+    showToast('正在生成回复……', 'info', 1500);
+    sendToAI(msg);
+  } else {
+    // Fallback to mock responses
+    showToast('消息已发送（模拟 · 请配置API Key启用AI）', 'info', 3000);
+    dialogScript.push({ speaker: '悠', text: msg });
+    const responses = [
+      { speaker: '雪菜', text: '「嗯……你说得对呢。」她微微侧头，似乎在思考着什么。「我会……好好考虑的。」' },
+      { speaker: '雪菜', text: '她沉默了片刻，然后轻轻点头。「原来你是这样想的啊。谢谢你告诉我。」' },
+    ];
+    dialogScript.push(responses[Math.floor(Math.random() * responses.length)]);
+    dialogIndex = dialogScript.length - 2;
+    showDialog(dialogIndex);
+  }
 }
 
 // ═══════════════════════════════════
@@ -3005,6 +3926,377 @@ console.log('%c雪之痕 — Yuki no Kiseki %cv1.1',
   'color:#8a8598;');
 console.log('%cFrontend Prototype — LLM-Interactive Galgame', 'color:#bfbac8;font-style:italic;');
 document.getElementById('game-container').addEventListener('contextmenu', e => e.preventDefault());
+
+// ═══════════════════════════════════
+// API SETTINGS MODAL LOGIC
+// ═══════════════════════════════════
+function openApiSettings() {
+  document.getElementById('api-primary-url').value = apiSettings.primary.baseUrl;
+  document.getElementById('api-primary-key').value = apiSettings.primary.apiKey;
+  document.getElementById('api-primary-model').value = apiSettings.primary.model;
+  document.getElementById('api-secondary-url').value = apiSettings.secondary.baseUrl;
+  document.getElementById('api-secondary-key').value = apiSettings.secondary.apiKey;
+  document.getElementById('api-secondary-model').value = apiSettings.secondary.model;
+  const secToggle = document.getElementById('api-secondary-toggle');
+  if (apiSettings.secondary.enabled) { secToggle.classList.add('on'); secToggle.setAttribute('aria-checked','true'); }
+  else { secToggle.classList.remove('on'); secToggle.setAttribute('aria-checked','false'); }
+  toggleSecondaryInputs(apiSettings.secondary.enabled);
+  modalManager.open('api-settings');
+}
+
+document.getElementById('api-secondary-toggle').addEventListener('click', function() {
+  this.classList.toggle('on');
+  const enabled = this.classList.contains('on');
+  this.setAttribute('aria-checked', enabled);
+  toggleSecondaryInputs(enabled);
+});
+
+function toggleSecondaryInputs(enabled) {
+  ['api-secondary-url','api-secondary-key','api-secondary-model'].forEach(id => {
+    document.getElementById(id).disabled = !enabled;
+  });
+}
+
+document.getElementById('api-save-btn').addEventListener('click', async () => {
+  apiSettings.primary.baseUrl = document.getElementById('api-primary-url').value || DEFAULT_API_SETTINGS.primary.baseUrl;
+  apiSettings.primary.apiKey = document.getElementById('api-primary-key').value;
+  apiSettings.primary.model = document.getElementById('api-primary-model').value || DEFAULT_API_SETTINGS.primary.model;
+  apiSettings.secondary.enabled = document.getElementById('api-secondary-toggle').classList.contains('on');
+  apiSettings.secondary.baseUrl = document.getElementById('api-secondary-url').value;
+  apiSettings.secondary.apiKey = document.getElementById('api-secondary-key').value;
+  apiSettings.secondary.model = document.getElementById('api-secondary-model').value;
+  await saveApiSettings();
+  modalManager.close('api-settings');
+  showToast('API 设置已保存', 'success', 2500);
+});
+
+document.getElementById('api-test-btn').addEventListener('click', async () => {
+  const url = document.getElementById('api-primary-url').value;
+  const key = document.getElementById('api-primary-key').value;
+  const model = document.getElementById('api-primary-model').value;
+  if (!key) { showToast('请先填写 API Key', 'warning', 3000); return; }
+  showToast('正在测试连接……', 'info', 2000);
+  try {
+    const resp = await fetch(url + '/chat/completions', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model, messages: [{role:'user',content:'你好'}], max_tokens: 5 })
+    });
+    if (resp.ok) showToast('连接成功！API 可用', 'success', 3000);
+    else {
+      const err = await resp.text();
+      showToast('连接失败：' + resp.status + ' ' + err.slice(0, 100), 'error', 5000);
+    }
+  } catch(e) { showToast('网络错误：' + e.message, 'error', 5000); }
+});
+
+// ═══════════════════════════════════
+// WORLD BOOK MODAL LOGIC
+// ═══════════════════════════════════
+let selectedLorebookId = null;
+
+function openLorebookModal() {
+  modalManager.open('lorebook');
+  renderLorebookList();
+}
+
+function renderLorebookList() {
+  const list = document.getElementById('lb-book-list');
+  list.innerHTML = lorebooks.map(lb => {
+    const isActive = activeLorebookIds.includes(lb.id);
+    const sel = lb.id === selectedLorebookId ? ' active' : '';
+    return `<div class="lb-book-item${sel}${isActive ? ' has-active' : ''}" data-lb-id="${lb.id}" onclick="selectLorebook('${lb.id}')">
+      <span class="active-dot"></span>${lb.name}
+    </div>`;
+  }).join('');
+}
+
+function selectLorebook(id) {
+  selectedLorebookId = id;
+  renderLorebookList();
+  const lb = lorebooks.find(l => l.id === id);
+  if (!lb) { document.getElementById('lb-empty-state').style.display='flex'; document.getElementById('lb-editor').style.display='none'; return; }
+  document.getElementById('lb-empty-state').style.display='none';
+  document.getElementById('lb-editor').style.display='block';
+  document.getElementById('lb-book-name').value = lb.name;
+  document.getElementById('lb-active-check').checked = activeLorebookIds.includes(id);
+  renderLorebookEntries(lb);
+}
+
+function renderLorebookEntries(lb) {
+  const container = document.getElementById('lb-entries-list');
+  container.innerHTML = lb.entries.map((entry, idx) => `
+    <div class="lb-entry-card">
+      <div class="lb-entry-header">
+        <button class="lb-entry-toggle${entry.enabled?' on':''}" onclick="toggleLbEntry('${lb.id}','${entry.id}')"></button>
+        <div class="lb-entry-keywords">
+          <input type="text" value="${entry.keys.join(', ')}" placeholder="关键词（逗号分隔）" onchange="updateLbEntryField('${lb.id}','${entry.id}','keys',this.value)">
+        </div>
+        <button class="lb-entry-delete" onclick="deleteLbEntry('${lb.id}','${entry.id}')" title="删除条目">
+          <span class="material-symbols-rounded" style="font-size:1rem">close</span>
+        </button>
+      </div>
+      <div class="lb-entry-content">
+        <textarea placeholder="条目内容……" onchange="updateLbEntryField('${lb.id}','${entry.id}','content',this.value)">${entry.content}</textarea>
+      </div>
+      <div class="lb-entry-comment">${entry.comment || ''}</div>
+    </div>
+  `).join('');
+}
+
+function toggleLbEntry(lbId, entryId) {
+  const lb = lorebooks.find(l => l.id === lbId);
+  if (!lb) return;
+  const entry = lb.entries.find(e => e.id === entryId);
+  if (!entry) return;
+  entry.enabled = !entry.enabled;
+  saveLorebooks();
+  selectLorebook(lbId);
+}
+
+function updateLbEntryField(lbId, entryId, field, value) {
+  const lb = lorebooks.find(l => l.id === lbId);
+  if (!lb) return;
+  const entry = lb.entries.find(e => e.id === entryId);
+  if (!entry) return;
+  if (field === 'keys') entry.keys = value.split(',').map(s => s.trim()).filter(Boolean);
+  else if (field === 'content') entry.content = value;
+  saveLorebooks();
+}
+
+function deleteLbEntry(lbId, entryId) {
+  const lb = lorebooks.find(l => l.id === lbId);
+  if (!lb) return;
+  lb.entries = lb.entries.filter(e => e.id !== entryId);
+  saveLorebooks();
+  selectLorebook(lbId);
+}
+
+document.getElementById('lb-add-entry-btn').addEventListener('click', () => {
+  const lb = lorebooks.find(l => l.id === selectedLorebookId);
+  if (!lb) return;
+  lb.entries.push({ id:'e'+Date.now(), keys:[], content:'', comment:'', enabled:true, position:'before_char' });
+  saveLorebooks();
+  selectLorebook(selectedLorebookId);
+});
+
+document.getElementById('lb-new-book-btn').addEventListener('click', async () => {
+  const name = prompt('世界书名称：', '新世界书');
+  if (!name) return;
+  const newLb = { id:'lb-'+Date.now(), name, entries:[] };
+  lorebooks.push(newLb);
+  activeLorebookIds.push(newLb.id);
+  await saveLorebooks();
+  selectedLorebookId = newLb.id;
+  renderLorebookList();
+  selectLorebook(newLb.id);
+});
+
+document.getElementById('lb-delete-book-btn').addEventListener('click', async () => {
+  if (!selectedLorebookId) return;
+  if (!confirm('确定要删除此世界书吗？此操作不可撤销。')) return;
+  lorebooks = lorebooks.filter(l => l.id !== selectedLorebookId);
+  activeLorebookIds = activeLorebookIds.filter(id => id !== selectedLorebookId);
+  await saveLorebooks();
+  selectedLorebookId = null;
+  document.getElementById('lb-empty-state').style.display='flex';
+  document.getElementById('lb-editor').style.display='none';
+  renderLorebookList();
+  showToast('世界书已删除', 'warning', 2000);
+});
+
+document.getElementById('lb-active-check').addEventListener('change', async function() {
+  if (!selectedLorebookId) return;
+  if (this.checked) { if (!activeLorebookIds.includes(selectedLorebookId)) activeLorebookIds.push(selectedLorebookId); }
+  else activeLorebookIds = activeLorebookIds.filter(id => id !== selectedLorebookId);
+  await saveLorebooks();
+  renderLorebookList();
+});
+
+// Import/Export
+document.getElementById('lb-import-btn').addEventListener('click', () => {
+  const input = document.createElement('input'); input.type = 'file'; input.accept = '.json';
+  input.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      if (data.lorebooks) {
+        for (const lb of data.lorebooks) {
+          const exists = lorebooks.find(l => l.id === lb.id);
+          if (exists) Object.assign(exists, lb);
+          else lorebooks.push(lb);
+        }
+        await saveLorebooks();
+        renderLorebookList();
+        showToast(`已导入 ${data.lorebooks.length} 本世界书`, 'success', 3000);
+      }
+    } catch(e) { showToast('导入失败：无效的 JSON 文件', 'error', 3000); }
+  };
+  input.click();
+});
+
+document.getElementById('lb-export-btn').addEventListener('click', () => {
+  const data = { lorebooks, activeLorebookIds, exportedAt: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'yuki-lorebooks.json'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('世界书已导出', 'success', 2000);
+});
+
+// ═══════════════════════════════════
+// VARIABLE PANEL LOGIC
+// ═══════════════════════════════════
+function openVariablePanel() {
+  modalManager.open('variables');
+  renderVariablePanel();
+}
+
+function renderVariablePanel() {
+  const list = document.getElementById('var-list');
+  const entries = Object.entries(gameVariables).filter(([k]) => !k.startsWith('_') && typeof gameVariables[k] !== 'object');
+  list.innerHTML = entries.map(([key, value]) => `
+    <div class="var-row">
+      <span class="var-key">${key}</span>
+      <input class="var-value" value="${value}" data-var-key="${key}" onchange="updateVariable('${key}', this.value)">
+      <button class="var-delete-btn" onclick="deleteVariable('${key}')"><span class="material-symbols-rounded" style="font-size:1rem">close</span></button>
+    </div>
+  `).join('');
+}
+
+function updateVariable(key, value) {
+  const num = Number(value);
+  gameVariables[key] = isNaN(num) ? value : num;
+}
+
+function deleteVariable(key) {
+  if (['chapter','location','time','weather'].includes(key)) {
+    showToast('核心变量不可删除', 'warning', 2000); return;
+  }
+  delete gameVariables[key];
+  renderVariablePanel();
+}
+
+document.getElementById('var-add-btn').addEventListener('click', () => {
+  const key = document.getElementById('var-new-key').value.trim();
+  const value = document.getElementById('var-new-value').value.trim();
+  if (!key) { showToast('请输入变量名', 'warning', 2000); return; }
+  const num = Number(value);
+  gameVariables[key] = isNaN(num) ? value : num;
+  document.getElementById('var-new-key').value = '';
+  document.getElementById('var-new-value').value = '';
+  renderVariablePanel();
+  showToast(`变量 ${key} 已添加`, 'success', 2000);
+});
+
+// ═══════════════════════════════════
+// CHAT MANAGER LOGIC
+// ═══════════════════════════════════
+async function openChatManager() {
+  modalManager.open('chat-manager');
+  await renderChatList();
+}
+
+async function renderChatList() {
+  const list = document.getElementById('chat-list');
+  const chats = await getAllChats();
+  document.getElementById('chat-current-char').textContent = getActiveCharacter().name;
+  if (chats.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-dim)">暂无对话记录<br><span style="font-size:0.75rem">点击「新对话」开始</span></div>';
+    return;
+  }
+  list.innerHTML = chats.sort((a,b) => b.createdAt - a.createdAt).map(chat => {
+    const isActive = chat.id === currentChatId;
+    const msgCount = chat.messages ? chat.messages.length : 0;
+    const date = new Date(chat.createdAt).toLocaleString('zh-CN');
+    const charName = chat.characterId ? (characterCards.find(c => c.id === chat.characterId)?.name || '未知') : '未知';
+    return `<div class="chat-session-card${isActive ? ' active' : ''}">
+      <div class="chat-session-info" onclick="switchToChat('${chat.id}')">
+        <div class="chat-session-name">${chat.name || '未命名会话'}</div>
+        <div class="chat-session-meta">
+          <span>${charName}</span><span>${msgCount} 条消息</span><span>${date}</span>
+        </div>
+      </div>
+      <div class="chat-session-actions">
+        <button class="chat-session-action" onclick="event.stopPropagation();branchFromChat('${chat.id}')" title="从此分支">
+          <span class="material-symbols-rounded" style="font-size:1rem">call_split</span>
+        </button>
+        <button class="chat-session-action danger" onclick="event.stopPropagation();removeChat('${chat.id}')" title="删除">
+          <span class="material-symbols-rounded" style="font-size:1rem">delete</span>
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function switchToChat(chatId) {
+  const success = await loadChat(chatId);
+  if (success) {
+    modalManager.close('chat-manager');
+    showToast('已切换到对话', 'success', 2000);
+    // Show last message
+    if (chatHistory.length > 0) {
+      const lastMsg = chatHistory[chatHistory.length - 1];
+      dialogSpeakerEl.textContent = getActiveCharacter().name;
+      dialogTextEl.textContent = lastMsg.content;
+      dialogTextEl.style.opacity = '1';
+    }
+  }
+}
+
+async function branchFromChat(chatId) {
+  await loadChat(chatId);
+  currentChatId = 'chat-' + Date.now();
+  await saveCurrentChat();
+  await renderChatList();
+  showToast('已创建分支对话', 'info', 2000);
+}
+
+async function removeChat(chatId) {
+  if (!confirm('确定删除此对话记录？')) return;
+  await deleteChat(chatId);
+  if (currentChatId === chatId) { currentChatId = null; chatHistory = []; }
+  await renderChatList();
+  showToast('对话已删除', 'warning', 2000);
+}
+
+document.getElementById('chat-new-btn').addEventListener('click', async () => {
+  await initChat();
+  modalManager.close('chat-manager');
+  showToast('新对话已创建', 'success', 2000);
+  showRespondHint();
+});
+
+// ═══════════════════════════════════
+// INIT: Start SillyTavern systems
+// ═══════════════════════════════════
+async function initSillyTavern() {
+  await openDB();
+  await loadApiSettings();
+  await loadLorebooks();
+  await loadCharacterCards();
+  await initChat();
+  initSillyTavernNav();
+
+  // Populate API settings form values
+  document.getElementById('api-primary-url').value = apiSettings.primary.baseUrl;
+  document.getElementById('api-primary-model').value = apiSettings.primary.model;
+  document.getElementById('api-secondary-url').value = apiSettings.secondary.baseUrl;
+  document.getElementById('api-secondary-model').value = apiSettings.secondary.model;
+
+  console.log('%cSillyTavern Core %cloaded',
+    'color:#c4a15a;font-weight:bold;', 'color:#928ca0;');
+  console.log(`%c  API: ${apiSettings.primary.apiKey ? 'configured' : 'not configured (mock mode)'}`,
+    'color:#5c5770;');
+  console.log(`%c  Lorebooks: ${lorebooks.length} | Active: ${activeLorebookIds.length}`,
+    'color:#5c5770;');
+  console.log(`%c  Character Cards: ${characterCards.length}`,
+    'color:#5c5770;');
+}
+
+initSillyTavern();
 </script>
 </body>
 </html>
