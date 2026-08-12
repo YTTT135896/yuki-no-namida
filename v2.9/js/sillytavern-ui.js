@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   SILLYTAVERN UI — v2.7
+   SILLYTAVERN UI — v2.9
    API, Presets, Lorebook, Variables, Chat modals
    ═══════════════════════════════════════════════════ */
 window.Yuki = window.Yuki || {};

@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   CONFIG & DATA — v2.7
+   CONFIG & DATA — v2.9
    All constants, default data, presets, and static assets
    ═══════════════════════════════════════════════════ */
 window.Yuki = window.Yuki || {};
@@ -12,7 +12,7 @@ Yuki.CONFIG = {
   DIALOG_HISTORY_LIMIT: 50,
   DB_NAME: 'yuki-no-kiseki-db',
   DB_VERSION: 4,
-  VERSION: '2.7'
+  VERSION: '2.9'
 };
 
 /* ── CG Data ── */

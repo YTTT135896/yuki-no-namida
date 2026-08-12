@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   SILLYTAVERN CORE — v2.7
+   SILLYTAVERN CORE — v2.9
    DB, API, Presets, Lorebook (position-grouped),
    Tavern-style Prompt Assembly, Stream, Chat, Variables, Memory
    ═══════════════════════════════════════════════════ */
@@ -774,7 +774,7 @@ Yuki.ST.init = function() {
     ]);
   }).then(function() {
     Yuki.ST.initChat();
-    console.log('%cSillyTavern Core v2.7 %cloaded','color:#c4a15a;font-weight:bold;','color:#928ca0;');
+    console.log('%cSillyTavern Core v2.9 %cloaded','color:#c4a15a;font-weight:bold;','color:#928ca0;');
     console.log('%c  API: '+ (Yuki.ST.apiSettings.primary.apiKey ? 'configured' : 'mock mode'),'color:#5c5770;');
     console.log('%c  Preset: '+ Yuki.ST.getActivePreset().name,'color:#5c5770;');
   });
