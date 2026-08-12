@@ -1,0 +1,14 @@
+/* ═══════════════════════════════════════════════════
+   LOADING SCREEN — Pure system fonts, renders instantly
+   ═══════════════════════════════════════════════════ */
+#loading-screen{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#f5f2ec 0%,#e8e3da 30%,#d5cfc4 70%,#c8c2b6 100%);display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s ease}
+#loading-screen.hidden{opacity:0;pointer-events:none;visibility:hidden}
+.loading-content{display:flex;flex-direction:column;align-items:center;gap:18px;width:320px}
+.loading-game-name{font-family:'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;font-size:2rem;font-weight:700;letter-spacing:.22em;color:#1a1725}
+.loading-game-sub{font-family:'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;font-size:.82rem;color:#8a8598;letter-spacing:.15em;font-style:italic;margin-top:-8px}
+.loading-progress-track{width:100%;height:2px;background:rgba(0,0,0,.08);border-radius:1px;overflow:hidden;margin-top:8px}
+.loading-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#c4a15a,#d4b86a);border-radius:1px;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.loading-status{font-family:'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;font-size:.72rem;color:#8a8598;letter-spacing:.08em}
+.loading-snow-icon{width:28px;height:28px;margin-top:6px;animation:loadingSpin 2.5s linear infinite}
+.loading-snow-icon::before{content:'✦';display:block;text-align:center;font-size:1.5rem;color:#c4a15a;line-height:28px}
+@keyframes loadingSpin{0%{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.3)}100%{transform:rotate(360deg) scale(1)}}
